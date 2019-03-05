@@ -1,16 +1,19 @@
+enum logic[6:0] 
+{
+    LOAD     = 7'b0000011
+    MISC-MEM = 7'b0001111
+    OP-IMM   = 7'b0010011
+    AUIPC	 = 7'b0010111
+    OP  	 = 7'b0110011
+    LUI	 	 = 7'b0110111
+    STORE    = 7'b0100011
+    BRANCH   = 7'b1100011
+    JALR     = 7'b1100111
+    JAL		 = 7'b1101111
+    SYSTEM   = 7'b1110011
+} opcodes;
 
 
-`define LOAD	 7'b0000011
-`define MISC-MEM 7'b0001111
-`define OP-IMM   7'b0010011
-`define AUIPC	 7'b0010111
-`define OP  	 7'b0110011
-`define LUI	 	 7'b0110111
-`define STORE    7'b0100011
-`define BRANCH   7'b1100011
-`define JALR     7'b1100111
-`define JAL		 7'b1101111
-`define SYSTEM   7'b1110011
 
 /* LUI(0110111) U-Type
  **ex 31:12         11:7    6:0
