@@ -11,9 +11,21 @@ enum logic[6:0]
     JALR     = 7'b1100111
     JAL		 = 7'b1101111
     SYSTEM   = 7'b1110011
-} opcodes;
+} opcode;
 
+typedef struct packed
+{
+    logic[6:0] funct7, imm2;
+    logic[4:0] rs2, rs1, rd, imm1;
+    logic[2:0] funct3;
+    logic[11:0] imm;
+} encode_type
 
+module decode
+    (input logic[31:0] encoded_value);
+{
+    {encode_type.funct7, encode_type.rs2, encode_type.rs1, encode_type.funct3, encode_type.rd, opcode} = encoded_value;
+}
 
 /* LUI(0110111) U-Type
  **ex 31:12         11:7    6:0
