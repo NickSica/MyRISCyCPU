@@ -7,9 +7,20 @@ interface registers(input logic clk);
     logic [31:0] pc;
 endinterface: registers
 
+typedef struct 
+{
+    logic[0] 
+} ControlData;
+
+typedef struct
+{
+    
+} DataControl;
+
 module Top(input logic[31:0] encoded_value);
     ControlPath ctrl
         (input clk,
-        input reset);
+        input reset,
+        );
     
 endmodule: Top

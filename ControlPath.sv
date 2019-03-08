@@ -79,7 +79,7 @@ module ControlPath
 
     assign assembly_cmds asm <= instruction;
 
-
+    
 
     always_comb begin
         case(instruction)
