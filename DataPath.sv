@@ -71,14 +71,55 @@ enum logic[31:0]
     CSRRCI   = 32'b????????????_?????_111_?????_1110011
 } assembly_cmds;
 
-module DataPath
-    (input clk,
+interface instr_ports
+    logic[4:0] pc;
+    logic[31:0] instruction;
+    assembly_cmds asm;
+    logic[4:0] rs1;
+    logic[4:0] rs2;
+    logic[4:0] rd0;
+    logic[31:0] op1;
+    logic[31:0] op2;
+    logic[31:0] op_out;
+    logic[31:0] imm;
+    logic[]
+
+    modport fetch(
+        input pc;
+        output instruction,
+        output asm;
+    );
+
+    modport decode(
+        input instruction,
+        input asm,
+        output stage2_rd,
+        output rs1,
+        output rs2,
+    );
+    
+    modport exec(
+        input stage
+
+    );
+
+    modport mem(
+
+    );
+
+    modport wb(
+
+    );
+endinterface: instr_ports
+
+module DataPath(
+    input clk,
     input logic[31:0] encoded_value,
     flags.sink fsink);
 
-    InstructionFetch instr_fetch();
+    InstructionFetch instr_fetch(.clk(clk), .ports(instr_ports.fetch));
+    Decode decode(.ports(instr_ports.decode));
     Execute execute();
-    Decode decode();
     MemoryAccess mem_access();
     Writeback writeback();
 
@@ -90,67 +131,7 @@ module DataPath
     assign assembly_cmds asm <= instruction;
     assign 
 
-    always_comb begin
-        case(instruction)
-            LUI     : 
-            AUIPC   :
-            JAL     :
-            JALR    :
-            //BRANCH Instructions
-            BEQ     :
-            BNE     :
-            BLT     :
-            BGE     :
-            BLTU    :
-            BGEU    :
-            //LOAD Instructions
-            LB      :
-            LH      :
-            LW      :
-            LBU     :
-            LHU     :
-            //STORE Instructions
-            SB      : 
-            SH      : 
-            SW      : 
-            //OP-IMM Instructions
-            ADDI    : 
-            SUBI    :
-            SLTI    : 
-            SLTIU   : 
-            XORI    : 
-            ORI     : 
-            ANDI    : 
-            SLLI    : 
-            SRLI    : 
-            SRAI    : 
-            //OP Instructions
-            ADD: 
-                operation <= 4'b0000;
-                op1 <= 
-            SUB: 
-            SLL: op_out = op1 << op2; 
-            SLT: op_out = (signed'(op1) < signed'(op2) ? 32'b1 : 32'b0);
-            SLTU: op_out = (op1 < op2 ? 32'b1 : 32'b0);
-            XOR: op_out = op1 ^ op2;
-            SRL: op_out = op1 >> op2;
-            SRA: op_out = op1 >>> op2;
-            OR: op_out = op1 | op2;
-            AND: op_out = op1 & op2;
-            //MISC-MEM Instructions
-            FENCE   :
-            FENCE_I :
-            //SYSTEM Instructions
-            ECALL   :
-            EBREAK  :
-            CSRRW   :
-            CSRRS   :
-            CSRRC   :
-            CSRRWI  :
-            CSRRSI  :
-            CSRRCI  :
-            default: op_out = 'z
-    end //always_comb
+    
 
     
 
