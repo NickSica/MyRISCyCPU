@@ -1,3 +1,4 @@
+/*
 interface registers(input logic clk);
     const logic x0 = 1'b0;
     logic [31:0] x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11;
@@ -6,21 +7,28 @@ interface registers(input logic clk);
     logic [31:0] x30, x31, x32;
     logic [31:0] pc;
 endinterface: registers
+*/
+interface Flags 
+    logic[0] we_bypass;
+    logic[0] we_stall;
+    logic[4:0] curr_rd;
 
-typedef struct 
-{
-    logic[0] 
-} ControlData;
+    modport src(
+        input curr_rd,
+        output we_bypass,
+        output we_stall
+    );
 
-typedef struct
-{
-    
-} DataControl;
+    modport sink(
+        input we_bypass,
+        input we_stall,
+        output curr_rd
+    );
+endinterface: flags;
 
-module Top(input logic[31:0] encoded_value);
-    ControlPath ctrl
-        (input clk,
-        input reset,
-        );
+module Top(input clk, input logic[31:0] encoded_value);
+    ControlPath ctrl(.clk(clk), .fsrc(flags.src));
+
+    DataPath data(.clk(clk), .fsink(flags.sink));
     
 endmodule: Top
