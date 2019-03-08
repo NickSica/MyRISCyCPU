@@ -1,3 +1,60 @@
-module Execute();
-
+module Execute(instr_ports ports);
+    always_comb 
+    begin
+        case(instruction)
+            LUI     : 
+            AUIPC   :
+            JAL     :
+            JALR    :
+            //BRANCH Instructions
+            BEQ     :
+            BNE     :
+            BLT     :
+            BGE     :
+            BLTU    :
+            BGEU    :
+            //LOAD Instructions
+            LB      :
+            LH      :
+            LW      :
+            LBU     :
+            LHU     :
+            //STORE Instructions
+            SB      : 
+            SH      : 
+            SW      : 
+            //OP-IMM Instructions
+            ADDI    : 
+            SLTI    : 
+            SLTIU   : 
+            XORI    : 
+            ORI     : 
+            ANDI    : 
+            SLLI    : 
+            SRLI    : 
+            SRAI    : 
+            //OP Instructions
+            ADD     : 
+            SUB, SUBI:
+            SLL     : 
+            SLT     : 
+            SLTU    : 
+            XOR     : 
+            SRL     : 
+            SRA     : 
+            OR      : 
+            AND     : 
+            //MISC-MEM Instructions
+            FENCE   :
+            FENCE_I :
+            //SYSTEM Instructions
+            ECALL   :
+            EBREAK  :
+            CSRRW   :
+            CSRRS   :
+            CSRRC   :
+            CSRRWI  :
+            CSRRSI  :
+            CSRRCI  :
+    end
 endmodule: Execute

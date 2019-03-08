@@ -5,38 +5,7 @@ module Alu
     output logic[31:0] op_out);
     
     always_comb begin
-        case(instruction)
-            LUI     : 
-            AUIPC   :
-            JAL     :
-            JALR    :
-            //BRANCH Instructions
-            BEQ     :
-            BNE     :
-            BLT     :
-            BGE     :
-            BLTU    :
-            BGEU    :
-            //LOAD Instructions
-            LB      :
-            LH      :
-            LW      :
-            LBU     :
-            LHU     :
-            //STORE Instructions
-            SB      : 
-            SH      : 
-            SW      : 
-            //OP-IMM Instructions
-            ADDI    : 
-            SLTI    : 
-            SLTIU   : 
-            XORI    : 
-            ORI     : 
-            ANDI    : 
-            SLLI    : 
-            SRLI    : 
-            SRAI    : 
+        case(operation)
             //OP Instructions
             ADD     : op_out = 32'(op1 + op2);
             SUB, SUBI: op_out = 32'(op1 - op2);
@@ -48,17 +17,6 @@ module Alu
             SRA     : op_out = op1 >>> op2;
             OR      : op_out = op1 | op2;
             AND     : op_out = op1 & op2;
-            //MISC-MEM Instructions
-            FENCE   :
-            FENCE_I :
-            //SYSTEM Instructions
-            ECALL   :
-            EBREAK  :
-            CSRRW   :
-            CSRRS   :
-            CSRRC   :
-            CSRRWI  :
-            CSRRSI  :
-            CSRRCI  :
+        endcase
     end
 endmodule: Alu

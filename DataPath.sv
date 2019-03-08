@@ -72,20 +72,30 @@ enum logic[31:0]
 } assembly_cmds;
 
 interface instr_ports
-    logic[4:0] pc;
     logic[31:0] instruction;
     assembly_cmds asm;
+
+    logic[4:0] pc;
     logic[4:0] rs1;
     logic[4:0] rs2;
     logic[4:0] rd0;
-    logic[31:0] op1;
-    logic[31:0] op2;
-    logic[31:0] op_out;
+    logic[31:0] rs1_val;
+    logic[31:0] rs2_val;
+    logic[31:0] rd0_val;
     logic[31:0] imm;
-    logic[]
+    
+    logic[0] w_en;
+    logic[4:0] w_addr;
+    logic[31:0] w_data;
+    logic[0] r1_en;
+    logic[31:0] r1_data;
+    logic[0] r2_en;
+    logic[31:0] r2_data;
+
 
     modport fetch(
-        input pc;
+        inout pc;
+        
         output instruction,
         output asm;
     );
@@ -93,14 +103,20 @@ interface instr_ports
     modport decode(
         input instruction,
         input asm,
-        output stage2_rd,
+        output rd0,
         output rs1,
         output rs2,
+        output r1_en,
+        output r2_en
     );
     
     modport exec(
-        input stage
+        input rs1_val;
+        input rs2_val;
+        input asm;
+        input imm;
 
+        output rd0_val;
     );
 
     modport mem(
@@ -109,6 +125,22 @@ interface instr_ports
 
     modport wb(
 
+    );
+
+    modport reg_file(
+        input asm;
+        input r1_en;
+        input rs1;
+        input r1_data;
+        input r2_en;
+        input rs2;
+        input r2_data;
+        input w_en;
+        input w_addr;
+        input w_data;
+        output rs1_val;
+        output rs2_val;
+        
     );
 endinterface: instr_ports
 
@@ -119,24 +151,10 @@ module DataPath(
 
     InstructionFetch instr_fetch(.clk(clk), .ports(instr_ports.fetch));
     Decode decode(.ports(instr_ports.decode));
-    Execute execute();
-    MemoryAccess mem_access();
-    Writeback writeback();
-
-
-    logic[4:0] 
-    logic[3:0] operation;
-    logic[31:0] op1, op2, op_out;
-
-    assign assembly_cmds asm <= instruction;
-    assign 
-
-    
-
-    
-
-    
-    Alu alu(.*);
+    Execute execute(.ports(instr_ports.exec));
+    MemoryAccess mem_access(.ports(instr_ports.mem));
+    Writeback writeback(.ports(instr_ports.wb));
+    RegisterFile reg0(.ports(instr_ports.reg_file));
 endmodule: DataPath
 
 /* LUI(0110111) U-Type
