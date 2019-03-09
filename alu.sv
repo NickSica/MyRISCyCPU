@@ -1,7 +1,7 @@
-module Alu
-    (input logic[3:0] operation, 
-    input unsigned logic[31:0] op1, 
-    input unsigned logic[31:0] op2, 
+module Alu(
+    input logic[3:0] operation, 
+    input logic[31:0] op1, 
+    input logic[31:0] op2, 
     output logic[31:0] op_out);
     
     always_comb begin

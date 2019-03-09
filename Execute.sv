@@ -1,4 +1,9 @@
 module Execute(instr_ports ports);
+    logic[3:0] aluOperation;
+    logic[31:0] op1;
+    logic[31:0] op2;
+    logic[31:0] op_out;
+
     always_comb 
     begin
         case(instruction)
@@ -24,7 +29,10 @@ module Execute(instr_ports ports);
             SH      : 
             SW      : 
             //OP-IMM Instructions
-            ADDI    : 
+            ADDI:
+                aluOperation = 4'b0000;
+                op1 = ports.imm;
+                op2 = ports.rs1_val;
             SLTI    : 
             SLTIU   : 
             XORI    : 
@@ -34,7 +42,8 @@ module Execute(instr_ports ports);
             SRLI    : 
             SRAI    : 
             //OP Instructions
-            ADD     : 
+            ADD:
+                aluOperation = 4'b0000; 
             SUB, SUBI:
             SLL     : 
             SLT     : 
@@ -56,5 +65,8 @@ module Execute(instr_ports ports);
             CSRRWI  :
             CSRRSI  :
             CSRRCI  :
+        endcase
+
+        Alu alu0(.operation(aluOperation), .op1, .op2, .op_out)
     end
 endmodule: Execute
