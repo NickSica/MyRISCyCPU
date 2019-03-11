@@ -58,7 +58,7 @@ enum logic[31:0]
     OR  	 = 32'b0000000_?????_?????_110_?????_0110011
     AND  	 = 32'b0000000_?????_?????_111_?????_0110011
     //MISC-MEM Instructions
-    FENCE    = 32'b0000_????_????_00000_000_00000_0001111
+    FENCE    = 32'b????_????_????_00000_000_00000_0001111
     FENCE_I  = 32'b0000_0000_0000_00000_001_00000_0001111
     //SYSTEM Instructions
     ECALL    = 32'b000000000000_00000_000_00000_1110011
@@ -76,28 +76,35 @@ interface instr_ports
     assembly_cmds asm;
 
     logic[4:0] pc;
+    logic[31:0] imm;
+
     logic[4:0] rs1;
     logic[4:0] rs2;
-    logic[4:0] rd0;
     logic[31:0] rs1_val;
     logic[31:0] rs2_val;
+    logic[0] r1_en;
+    logic[0] r2_en;
+
+    logic[4:0] rd0;
     logic[31:0] rd0_val;
-    logic[31:0] imm;
-    
+    logic[31:0] rd1_val;
     logic[0] w_en;
     logic[4:0] w_addr;
     logic[31:0] w_data;
-    logic[0] r1_en;
-    logic[31:0] r1_data;
-    logic[0] r2_en;
-    logic[31:0] r2_data;
+
+    logic[0] csrr_en;
+    logic[0] csrw_en;
+    logic[11:0] csrr_addr;
+    logic[11:0] csrw_addr;
+    logic[31:0] csrr_data;
+    logic[31:0] csrw_data;
 
 
     modport fetch(
-        inout pc;
+        inout pc,
         
         output instruction,
-        output asm;
+        output asm
     );
 
     modport decode(
@@ -111,12 +118,16 @@ interface instr_ports
     );
     
     modport exec(
-        input rs1_val;
-        input rs2_val;
-        input asm;
-        input imm;
+        inout pc,
+        
+        input rs1_val,
+        input rs2_val,
+        input rd0,
+        input asm,
+        input imm,
 
-        output rd0_val;
+        output rd0_val
+
     );
 
     modport mem(
@@ -128,33 +139,48 @@ interface instr_ports
     );
 
     modport reg_file(
-        input asm;
-        input r1_en;
-        input rs1;
-        input r1_data;
-        input r2_en;
-        input rs2;
-        input r2_data;
-        input w_en;
-        input w_addr;
-        input w_data;
-        output rs1_val;
-        output rs2_val;
-        
+        input r1_en,
+        input rs1,
+        input r2_en,
+        input rs2,
+        input w_en,
+        input w_addr,
+        input w_data,
+
+        output rs1_val,
+        output rs2_val
+    );
+
+    modport csr_file(
+        inout csrr_en,
+        inout csrw_en,
+        input csrr_addr,
+        input csrw_addr,
+        input csrw_data
+
+        output csrr_data
     );
 endinterface: instr_ports
+
+interface ctl_flags
+    logic[0] is_ls;
+    logic[35:0] ls_type_reg; //[]
+endinterface: ctl_flags
 
 module DataPath(
     input clk,
     input logic[31:0] encoded_value,
     flags.sink fsink);
+    //TODO: Implement flags to check for stalling/killing new instructions for branch, jump, etc
+    //      Error checking for misaligned instruction fetch due to jump (pg 16)
 
     InstructionFetch instr_fetch(.clk(clk), .ports(instr_ports.fetch));
     Decode decode(.ports(instr_ports.decode));
     Execute execute(.ports(instr_ports.exec));
     MemoryAccess mem_access(.ports(instr_ports.mem));
     Writeback writeback(.ports(instr_ports.wb));
-    RegisterFile reg0(.ports(instr_ports.reg_file));
+    RegisterFile reg0(.clk(clk), .ports(instr_ports.reg_file));
+    CSRFile csr0(.clk(clk), .ports(instr_ports.csr_file));
 endmodule: DataPath
 
 /* LUI(0110111) U-Type
