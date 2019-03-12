@@ -174,10 +174,10 @@ interface ctl_flags
     
 endinterface: ctl_flags
 
-module DataPath(
-    input clk,
+module CPU(
+    input logic clk,
     input logic[31:0] encoded_value,
-    flags.sink fsink);
+    flags.sink fsrc);
     //TODO: Implement flags to check for stalling/killing new instructions for branch, jump, etc
     //      Error checking for misaligned instruction fetch due to jump (pg 16)
     assign ctl_flags.bypass = (2'(instr_ports.rs1 == mem_rd) | (2'(instr_ports.rs2 == mem_rd) << 1)) ^ 2'b0;  
@@ -187,10 +187,9 @@ module DataPath(
     Execute execute(.ports(instr_ports.exec));
     MemoryAccess mem_access(.ports(instr_ports.mem));
     //Writeback writeback(.ports(instr_ports.wb));
-    Cache cache(.clk(clk));
     RegisterFile reg_file(.clk(clk), .ports(instr_ports.reg_file));
     CSRFile csr_file(.clk(clk), .ports(instr_ports.csr_file));
-endmodule: DataPath
+endmodule: CPU
 
 /* LUI(0110111) U-Type
  **ex 31:12         11:7    6:0

@@ -5,8 +5,7 @@ module Execute(input logic[0] val_change, instr_ports ports, ctl_flags flags);
     logic[31:0] op2 = 0'b0;
     logic[31:0] op_out = 0'b0;
 */
-    always_comb 
-    begin
+    always_comb begin
         if(flags.bypass & 2'b01) begin
             ports.rs1_val = ports.mem_rd_val;
         end else if(flags.bypass & 2'b10) begin

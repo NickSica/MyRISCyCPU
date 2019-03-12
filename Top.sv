@@ -8,8 +8,18 @@ interface registers(input logic clk);
     logic [31:0] pc;
 endinterface: registers
 */
+interface RAM_CPU
+    modport src(
+
+    );
+
+    modport sink(
+
+    );
+endinterface: RAM_CPU
+
 interface Flags 
-    logic[0] we_bypass;
+    logic[0] ;
     logic[0] we_stall;
     logic[4:0] curr_rd;
 
@@ -27,8 +37,9 @@ interface Flags
 endinterface: flags;
 
 module Top(input clk, input logic[31:0] encoded_value);
-    //ControlPath ctrl(.clk(clk), .fsrc(flags.src));
+    initial begin
 
-    DataPath data(.clk(clk), .fsink(flags.sink));
-    
+    end
+    CPU cpu(.clk(clk), .fsrc(flags.src));
+    RAM ram();
 endmodule: Top
