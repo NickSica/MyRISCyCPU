@@ -2,11 +2,10 @@
 
 module Decode(instr_ports.decode ports);
     always_comb begin
-        
         case(ports.asm)
             //U-Type
             LUI, AUIPC:
-                ports.rd0 <= ports.instruction[11:7];
+                ports.rd <= ports.instruction[11:7];
                 ports.rs1 <= 5'bx;
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b0;
@@ -16,7 +15,7 @@ module Decode(instr_ports.decode ports);
             
             //J-Type
             JAL:
-                ports.rd0 <= ports.instruction[11:7];
+                ports.rd <= ports.instruction[11:7];
                 ports.rs1 <= 5'bx;
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b0;
@@ -26,7 +25,7 @@ module Decode(instr_ports.decode ports);
             
             //I-Type
             JALR, LB, LH, LW, LBU, LHU, ADDI, SLTI, SLTIU, XORI, ORI, ANDI, SLLI, SRLI, SRAI:
-                ports.rd0 <= ports.instruction[11:7];
+                ports.rd <= ports.instruction[11:7];
                 ports.rs1 <= ports.instruction[19:15];
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b1;
@@ -36,7 +35,7 @@ module Decode(instr_ports.decode ports);
             
             //B-Type
             BEQ, BNE, BLT, BGE, BLTU, BGEU:
-                ports.rd0 <= 5'bx;
+                ports.rd <= 5'bx;
                 ports.rs1 <= ports.instruction[19:15];
                 ports.rs2 <= ports.instruction[24:20];
                 ports.r1_en <= 1'b1;
@@ -46,7 +45,7 @@ module Decode(instr_ports.decode ports);
             
             //S-Type
             SB, SH, SW: 
-                ports.rd0 <= 5'bx;
+                ports.rd <= 5'bx;
                 ports.rs1 <= ports.instruction[19:15];
                 ports.rs2 <= ports.instruction[24:20];
                 ports.r1_en <= 1'b1;
@@ -56,7 +55,7 @@ module Decode(instr_ports.decode ports);
             
             //R-Type
             ADD, SUB, SLL, SLT, SLTU, XOR, SRL, SRA, OR, AND:            
-                ports.rd0 <= ports.instruction[11:7];
+                ports.rd <= ports.instruction[11:7];
                 ports.rs1 <= ports.instruction[19:15];
                 ports.rs2 <= ports.instruction[24:20];
                 ports.r1_en <= 1'b1;
@@ -66,7 +65,7 @@ module Decode(instr_ports.decode ports);
 
             //Weird Types
             FENCE, FENCE_I:
-                ports.rd0 <= 5'b0;
+                ports.rd <= 5'b0;
                 ports.rs1 <= 5'b0;
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b0;
@@ -74,7 +73,7 @@ module Decode(instr_ports.decode ports);
                 ports.csrr_en <= 1'b0;
                 ports.imm <= ports.instruction[31:20];
             ECALL:
-                ports.rd0 <= 5'b0;
+                ports.rd <= 5'b0;
                 ports.rs1 <= 5'b0;
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b0;
@@ -82,7 +81,7 @@ module Decode(instr_ports.decode ports);
                 ports.csrr_en <= 1'b0;
                 ports.imm <= 32'b0;
             EBREAK:
-                ports.rd0 <= 5'b0;
+                ports.rd <= 5'b0;
                 ports.rs1 <= 5'b0;
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b0;
@@ -90,7 +89,7 @@ module Decode(instr_ports.decode ports);
                 ports.csrr_en <= 1'b0;
                 ports.imm <= 32'b1;
              CSRRW, CSRRS, CSRRC:
-                ports.rd0 <= ports.instruction[11:7];
+                ports.rd <= ports.instruction[11:7];
                 ports.rs1 <= ports.instruction[19:15];
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b1;
@@ -99,7 +98,7 @@ module Decode(instr_ports.decode ports);
                 ports.csrr_addr <= ports.instruction[31:20];
                 ports.imm <= 32'b0;
             CSRRWI, CSRRSI, CSRRCI:
-                ports.rd0 <= ports.instruction[11:7];
+                ports.rd <= ports.instruction[11:7];
                 ports.rs1 <= 5'bx;
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b0;
@@ -109,7 +108,7 @@ module Decode(instr_ports.decode ports);
                 ports.imm <= {27'b0, ports.instruction[19:15]};
 
             default:
-                ports.rd0 <= 5'bx;
+                ports.rd <= 5'bx;
                 ports.rs1 <= 5'bx;
                 ports.rs2 <= 5'bx;
                 ports.r1_en <= 1'b0;

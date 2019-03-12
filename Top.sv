@@ -27,7 +27,7 @@ interface Flags
 endinterface: flags;
 
 module Top(input clk, input logic[31:0] encoded_value);
-    ControlPath ctrl(.clk(clk), .fsrc(flags.src));
+    //ControlPath ctrl(.clk(clk), .fsrc(flags.src));
 
     DataPath data(.clk(clk), .fsink(flags.sink));
     

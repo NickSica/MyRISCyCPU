@@ -85,9 +85,11 @@ interface instr_ports
     logic[0] r1_en;
     logic[0] r2_en;
 
-    logic[4:0] rd0;
-    logic[31:0] rd0_val;
-    logic[31:0] rd1_val;
+    logic[4:0] rd;
+    logic[31:0] rd_val;
+    logic[4:0] mem_rd;
+    logic[4:0] wb_rd;
+    logic[31:0] wb_rd_val;
     logic[0] w_en;
     logic[4:0] w_addr;
     logic[31:0] w_data;
@@ -110,7 +112,7 @@ interface instr_ports
     modport decode(
         input instruction,
         input asm,
-        output rd0,
+        output rd,
         output rs1,
         output rs2,
         output r1_en,
@@ -122,16 +124,19 @@ interface instr_ports
         
         input rs1_val,
         input rs2_val,
-        input rd0,
+        input rd,
+        input mem_rd_val,
         input asm,
         input imm,
 
-        output rd0_val
-
+        output rd_val,
+        output mem_rd
     );
 
     modport mem(
-
+        input 
+        output wb_rd;
+        output wb_rd_val
     );
 
     modport wb(
@@ -163,8 +168,10 @@ interface instr_ports
 endinterface: instr_ports
 
 interface ctl_flags
-    logic[0] is_ls;
-    logic[35:0] ls_type_reg; //[]
+    logic[0] bypass,
+    logic[0] is_ls,
+    logic[35:0] ls_type_reg //[]
+    
 endinterface: ctl_flags
 
 module DataPath(
@@ -173,14 +180,16 @@ module DataPath(
     flags.sink fsink);
     //TODO: Implement flags to check for stalling/killing new instructions for branch, jump, etc
     //      Error checking for misaligned instruction fetch due to jump (pg 16)
-
+    assign ctl_flags.bypass = (2'(instr_ports.rs1 == mem_rd) | (2'(instr_ports.rs2 == mem_rd) << 1)) ^ 2'b0;  
+    
     InstructionFetch instr_fetch(.clk(clk), .ports(instr_ports.fetch));
-    Decode decode(.ports(instr_ports.decode));
+    Decode decode(.bypass(bypass), .ports(instr_ports.decode), .flags(instr_ports.ctl_flags));
     Execute execute(.ports(instr_ports.exec));
     MemoryAccess mem_access(.ports(instr_ports.mem));
-    Writeback writeback(.ports(instr_ports.wb));
-    RegisterFile reg0(.clk(clk), .ports(instr_ports.reg_file));
-    CSRFile csr0(.clk(clk), .ports(instr_ports.csr_file));
+    //Writeback writeback(.ports(instr_ports.wb));
+    Cache cache(.clk(clk));
+    RegisterFile reg_file(.clk(clk), .ports(instr_ports.reg_file));
+    CSRFile csr_file(.clk(clk), .ports(instr_ports.csr_file));
 endmodule: DataPath
 
 /* LUI(0110111) U-Type
