@@ -9,17 +9,17 @@
     I2C_SDAT = PIN_F1
 */
 typedef enum {
-    WAIT = 3'b000;
-    START = 3'b001;
-    SEND_ADDR = 3'b010; 
-    ACK = 3'b011;
-    ACK_WAIT = 3'b100
-    RECV_DATA = 3'b101;
-    STOP = 3'b110;
+    WAIT = 3'b000,
+    START = 3'b001,
+    SEND_ADDR = 3'b010,
+    ACK = 3'b011,
+    ACK_WAIT = 3'b100,
+    RECV_DATA = 3'b101,
+    STOP = 3'b110
 } ControllerState;
 
 module MemController(
-    input logic clk
+    input logic clk,
     input logic data);
 
     logic busy = 1'b0;

@@ -4,7 +4,7 @@ module I2C(
 
     always_ff @(negedge scl) begin
         
-    end
+    end //always_ff
     
     always_ff @(posedge scl) begin
         
