@@ -4,4 +4,48 @@
   <component name="JavaScriptSettings">
     <option name="languageLevel" value="ES6" />
   </component>
+  <component name="SVCompilerDirectivesDefines">
+    <option name="argumentDefaultText">
+      <map>
+        <entry key="TCQ">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="argumentNames">
+      <map>
+        <entry key="TCQ">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="body">
+      <map>
+        <entry key="TCQ" value="100" />
+      </map>
+    </option>
+    <option name="dependencies">
+      <map>
+        <entry key="TCQ">
+          <value>
+            <set />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="offset">
+      <map>
+        <entry key="TCQ" value="8" />
+      </map>
+    </option>
+    <option name="source">
+      <map>
+        <entry key="TCQ" value="scratch.sv" />
+      </map>
+    </option>
+  </component>
 </project>

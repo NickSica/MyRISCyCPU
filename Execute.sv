@@ -7,184 +7,178 @@ module Execute(input logic[0] val_change, instr_ports ports, ctl_flags flags);
         end
 
         case(instruction)
-            LUI:
-                ports.rd_val = ports.imm;
-            AUIPC:
-                ports.rd_val = ports.imm + ports.pc;
+            LUI: ports.rd_val = ports.imm;
+
+            AUIPC: ports.rd_val = ports.imm + ports.pc;
                 /*
                 aluOperation = 4'b0000;
                 op1 = ports.imm;
                 op2 = ports.pc;
                 */
-            JAL: //x1 as return address register and x5 as an alternate link register
+
+            JAL: begin //x1 as return address register and x5 as an alternate link register
                 ports.rd_val = ports.pc + 4;
                 ports.pc = ports.pc + ports.imm;
+            end
                 
-            JALR:
+            JALR: begin
                 ports.rd_val = ports.pc + 4;
                 ports.pc = (ports.rs1_val + ports.imm) & 8'hFFFFFFFE;
                 ports.pc[0] = 0;
+            end
+
             //BRANCH Instructions
-            BEQ:
-                ports.pc = (rs1_val == rs2_val) ? (ports.imm + ports.pc) : (ports.pc);
-            BNE:
-                ports.pc = (rs1_val != rs2_val) ? (ports.imm + ports.pc) : (ports.pc);
-            BLT:
-                ports.pc = (signed'(ports.rs1_val) < signed'(ports.rs2_val)) ? (ports.imm + ports.pc) : ports.pc;
-            BGE:
-                ports.pc = (signed'(ports.rs1_val) >= signed'(ports.rs2_val)) ? (ports.imm + ports.pc) : ports.pc;
-            BLTU:
-                ports.pc = (unsigned'(ports.rs1_val) < unsigned'(ports.rs2_val)) ? (ports.imm + ports.pc) : ports.pc;
-            BGEU:
-                ports.pc = (unsigned'(ports.rs1_val) >= unsigned'(ports.rs2_val)) ? (ports.imm + ports.pc) : ports.pc;
+            BEQ: ports.pc = (rs1_val == rs2_val) ? (ports.imm + ports.pc) : (ports.pc);
+            BNE: ports.pc = (rs1_val != rs2_val) ? (ports.imm + ports.pc) : (ports.pc);
+            BLT: ports.pc = (signed'(ports.rs1_val) < signed'(ports.rs2_val)) ? (ports.imm + ports.pc) : ports.pc;
+            BGE: ports.pc = (signed'(ports.rs1_val) >= signed'(ports.rs2_val)) ? (ports.imm + ports.pc) : ports.pc;
+            BLTU: ports.pc = (unsigned'(ports.rs1_val) < unsigned'(ports.rs2_val)) ? (ports.imm + ports.pc) : ports.pc;
+            BGEU: ports.pc = (unsigned'(ports.rs1_val) >= unsigned'(ports.rs2_val)) ? (ports.imm + ports.pc) : ports.pc;
+
             //LOAD Instructions
             //TODO: Retrieve from memory here                
-            LB:
+            LB: begin
                 ports.rd_val = {27'b0, ports.rd};
                 flags.is_ls = 1'b1;
                 flags.ls_type_reg = {4'b0_000, (ports.rs1_val + ports.imm)};
-            LH:
+            end
+            LH: begin
                 ports.rd_val = {27'b0, ports.rd};
                 flags.is_ls = 1'b1;
                 flags.ls_type_reg = {4'b0_001, (ports.rs1_val + ports.imm)};
-            LW:
+            end
+            LW: begin
                 ports.rd_val = {27'b0, ports.rd};
                 flags.is_ls = 1'b1;
                 flags.ls_type_reg = {4'b0_010, (ports.rs1_val + ports.imm)};
-            LBU:
+            end
+            LBU: begin
                 ports.rd_val = {27'b0, ports.rd};
                 flags.is_ls = 1'b1;
                 flags.ls_type_reg = {4'b0_100, (ports.rs1_val + ports.imm)};
-            LHU:
+            end
+            LHU: begin
                 ports.rd_val = {27'b0, ports.rd};
                 flags.is_ls = 1'b1;
                 flags.ls_type_reg = {4'b0_110, (ports.rs1_val + ports.imm)};
+            end
+
             //STORE Instructions
-            SB: 
+            SB: begin
                 ports.rd_val = ports.rs2_val;
                 flags.is_ls = 1'b1;
                 flags.ls_type_reg = {4'b1_000, (ports.rs1_val + ports.imm)};
-            SH:
+            end
+            SH: begin
                 ports.rd_val = ports.rs2_val;
                 flags.is_ls = 1'b1;
                 flags.ls_type_reg = {4'b1_001, (ports.rs1_val + ports.imm)};
-            SW:
+            end
+            SW: begin
                 ports.rd_val = ports.rs2_val;
                 flags.is_ls = 1'b1;
                 flags.ls_type_reg = {4'b1_010, (ports.rs1_val + ports.imm)};
+            end
+
             //OP-IMM Instructions
-            ADDI:
-                ports.rd_val = 32'(ports.imm + ports.rs1_val);
+            ADDI: ports.rd_val = 32'(ports.imm + ports.rs1_val);
                 /*
                 aluOperation = 4'b0000;
                 op1 = ports.imm;
                 op2 = ports.rs1_val;
                 */
-            SLTI: 
-                ports.rd_val = (signed'(ports.rs1_val) < signed'(ports.imm) ? 32'b1 : 32'b0);
+            SLTI: ports.rd_val = (signed'(ports.rs1_val) < signed'(ports.imm) ? 32'b1 : 32'b0);
                 /* aluOperation = 4'b0011;
                 op1 = ports.rs1_val;
                 op2 = ports.imm; */
-            SLTIU:
-                ports.rd_val = (unsigned'(ports.rs1_val) < unsigned'(ports.imm) ? 32'b1 : 32'b0);
+            SLTIU: ports.rd_val = (unsigned'(ports.rs1_val) < unsigned'(ports.imm) ? 32'b1 : 32'b0);
                 /* aluOperation = 4'b0100;
                 op1 = ports.rs1_val;
                 op2 = ports.imm; */
-            XORI:
-                ports.rd_val = ports.rs1_val ^ ports.imm;
+            XORI: ports.rd_val = ports.rs1_val ^ ports.imm;
                 /* aluOperation = 4'b0101;
                 op1 = ports.rs1_val;
                 op2 = ports.imm; */
-            ORI:
-                ports.rd_val = ports.rs1_val | ports.imm;
+            ORI: ports.rd_val = ports.rs1_val | ports.imm;
                 /* aluOperation = 4'b1000; 
                 op1 = ports.rs1_val;
                 op2 = ports.imm; */
-            ANDI:
-                ports.rd_val = ports.rs1_val & ports.imm;
+            ANDI: ports.rd_val = ports.rs1_val & ports.imm;
                 /* aluOperation = 4'b1001;
                 op1 = ports.rs1_val;
                 op2 = ports.imm; */
-            SLLI:
-                ports.rd_val = ports.rs1_val << ports.imm[4:0]; 
+            SLLI: ports.rd_val = ports.rs1_val << ports.imm[4:0];
                 /* aluOperation = 4'b0010;
                 op1 = ports.rs1_val;
                 op2 = ports.imm; */
-            SRLI:
-                ports.rd_val = ports.rs1_val >> ports.imm[4:0];
+            SRLI: ports.rd_val = ports.rs1_val >> ports.imm[4:0];
                 /* aluOperation = 4'b0110; 
                 op1 = ports.rs1_val;
                 op2 = ports.imm; */
-            SRAI:
-                ports.rd_val = ports.rs1_val >>> ports.imm[4:0];
+            SRAI: ports.rd_val = ports.rs1_val >>> ports.imm[4:0];
                 /* aluOperation = 4'b0111; 
                 op1 = ports.rs1_val;
                 op2 = ports.imm; */
+
             //OP Instructions
-            ADD:
-                ports.rd_val = 32'(ports.rs1_val + ports.rs2_val);
+            ADD: ports.rd_val = 32'(ports.rs1_val + ports.rs2_val);
                 /* aluOperation = 4'b0000;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            SUB:
-                ports.rd_val = 32'(ports.rs1_val - ports.rs2_val);
+            SUB: ports.rd_val = 32'(ports.rs1_val - ports.rs2_val);
                 /* aluOperation = 4'b0001;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            SLL:
-                ports.rd_val = ports.rs1_val << ports.rs2_val[4:0]; 
+            SLL: ports.rd_val = ports.rs1_val << ports.rs2_val[4:0];
                 /* aluOperation = 4'b0010;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            SLT:
-                ports.rd_val = (signed'(ports.rs1_val) < signed'(ports.rs2_val)) ? 32'b1 : 32'b0;
+            SLT: ports.rd_val = (signed'(ports.rs1_val) < signed'(ports.rs2_val)) ? 32'b1 : 32'b0;
                 /* aluOperation = 4'b0011;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            SLTU:
-                ports.rd_val = (unsigned'(ports.rs1_val) < unsigned'(ports.rs2_val)) ? 32'b1 : 32'b0;
+            SLTU: ports.rd_val = (unsigned'(ports.rs1_val) < unsigned'(ports.rs2_val)) ? 32'b1 : 32'b0;
                 /* aluOperation = 4'b0100;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            XOR:
-                ports.rd_val = ports.rs1_val ^ ports.rs2_val;
+            XOR: ports.rd_val = ports.rs1_val ^ ports.rs2_val;
                 /* aluOperation = 4'b0101;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            SRL:
-                ports.rd_val = ports.rs1_val >> ports.rs2_val[4:0];
+            SRL: ports.rd_val = ports.rs1_val >> ports.rs2_val[4:0];
                 /* aluOperation = 4'b0110;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            SRA:
-                ports.rd_val = ports.rs1_val >>> ports.rs2_val[4:0]; 
+            SRA: ports.rd_val = ports.rs1_val >>> ports.rs2_val[4:0];
                 /* aluOperation = 4'b0111;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            OR:
-                ports.rd_val = ports.rs1_val | ports.rs2_val;
+            OR: ports.rd_val = ports.rs1_val | ports.rs2_val;
                 /* aluOperation = 4'b1000;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
-            AND:
-                ports.rd_val = ports.rs1_val & ports.rs2_val; 
+            AND: ports.rd_val = ports.rs1_val & ports.rs2_val;
                 /* aluOperation = 4'b1001;
                 op1 = ports.rs1_val;
                 op2 = ports.rs2_val; */
+
             //MISC-MEM Instructions
             // TODO: Unsure where to go with this as the base implementation is very vague
+            /*
             FENCE:
             FENCE_I:
+
             //SYSTEM Instructions
             // TODO: Unsure where to go with these(ECALL/EBREAK) as the base implementation is very vague
-            ECALL   :
-            EBREAK  :
+            ECALL:
+            EBREAK:
             CSRRW:
             CSRRS:
             CSRRC:
             CSRRWI:
             CSRRSI:
             CSRRCI:
+            */
         endcase
         /*
         if(~op1 || ~op2)

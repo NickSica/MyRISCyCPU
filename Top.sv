@@ -8,18 +8,18 @@ interface registers(input logic clk);
     logic [31:0] pc;
 endinterface: registers
 */
-interface RAM_CPU
+interface RAM_CPU();
+    logic[31:0] placeholder;
     modport src(
-
+        input placeholder
     );
 
     modport sink(
-
+        output placeholder
     );
 endinterface: RAM_CPU
 
-interface Flags 
-    logic[0] ;
+interface Flags();
     logic[0] we_stall;
     logic[4:0] curr_rd;
 

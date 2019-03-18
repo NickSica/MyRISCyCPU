@@ -6,7 +6,7 @@ module RegisterFile(
 
     always_ff @(posedge clk) begin
         if(!rst) begin
-            if(ports.w_en && (ports.w_addr != 0) begin
+            if(ports.w_en && (ports.w_addr != 0)) begin
                 regs[ports.w_addr] <= ports.w_data;
             end// if2
         end //if1       
@@ -17,7 +17,7 @@ module RegisterFile(
             ports.rs1_val <= 32'b0;
         end else if(ports.w_en && (ports.rs1 == ports.w_addr)) begin
             ports.rs1_val <= ports.w_data;
-        end else
+        end else begin
             ports.rs1_val <= regs[ports.rs1];
         end //if-else
     end //always_comb
@@ -27,7 +27,7 @@ module RegisterFile(
             ports.rs2_val <= 32'b0;
         end else if(ports.w_en && (ports.rs2 == ports.w_addr)) begin
             ports.rs2_val <= ports.w_data;
-        end else
+        end else begin
             ports.rs2_val <= regs[ports.rs2];
         end //if-else
     end //always_comb

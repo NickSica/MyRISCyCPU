@@ -34,27 +34,30 @@ module MemController(
     
     always_ff @(posedge clk) begin
         case(state)
-            WAIT:
+            WAIT: begin
                 if(enable) begin
                     sda <= 1'b0;
                     state <= SEND_ADDR;
                     count <= 7;
                 end
-            SEND_ADDR:
+            end
+            SEND_ADDR: begin
                 sda = addr[count];
                 if(count == 0) begin
                     state <= ACK;
                 end else begin
                     count <= count - 1;
                 end
-            ACK:
+            end
+            ACK: begin
                 if(sda == 1) begin
                     state <= WAIT;
                     count <= 7;
                 end else begin
                     state <= ACK_WAIT;
                 end
-            ACK_WAIT:
+            end
+            ACK_WAIT: begin
                 count <= 0;
                 stop = sda;
                 if(addr[0] == 0) begin
@@ -62,7 +65,8 @@ module MemController(
                 end else begin
                     state <= RECV_DATA;
                 end
-            SEND_DATA:
+            end
+            SEND_DATA: begin
                 sda = data[count];
                 if(count == 7) begin
                     count <= 7;
@@ -70,42 +74,25 @@ module MemController(
                 end else begin
                     count <= count + 1;
                 end
-            RECV_DATA:
+            end
+            RECV_DATA: begin
                 if(count != 8) begin
                     data[count] = sda[count];
                     count <= count + 1;
                 end else begin
                     count <= 1;
-                    state <= ACK
+                    state <= ACK;
                 end
-
+            end
         endcase
-
-        if(start & ~ack) begin
-            if(count <= 8) begin
-                count++;
-            end else if(count <= 9) begin
-                ack <= sda;
-                count++;
-            end else if(count <= 10) begin
-                count++;
-            end else if()
-        end else if(ack == 1) begin
-            ack <= 0;
-            count <= 1;
-            start <= 0;
-        end
-    end //always_ff
+    end
 
     always_ff @(negedge clk) begin
-        if(state == SEND_DATA ACK_WAIT begin
+        if(state == SEND_DATA || state == RECV_DATA) begin
             if((stop == 0) & (sda == 1)) begin
                 state <= WAIT;
                 count <= 7;
             end
         end
     end //always_ff
-
-    //I2C i2c(.scl(i2c_clk), .sda(i2c_data));
-
 endmodule: MemController
