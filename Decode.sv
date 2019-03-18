@@ -22,7 +22,7 @@ module Decode(instr_ports.decode ports);
                 ports.r1_en <= 1'b0;
                 ports.r2_en <= 1'b0;
                 ports.csrr_en <= 1'b0;
-                ports.imm <= {12{ports.instruction[31]}, ports.instruction[19:12], ports.instruction[20], ports.instruction[30:21]};
+                ports.imm <= {{12{ports.instruction[31]}}, ports.instruction[19:12], ports.instruction[20], ports.instruction[30:21]};
             end
 
             //I-Type
@@ -33,7 +33,7 @@ module Decode(instr_ports.decode ports);
                 ports.r1_en <= 1'b1;
                 ports.r2_en <= 1'b0;
                 ports.csrr_en <= 1'b0;
-                ports.imm <= {21{ports.instruction[31]}, ports.instruction[30:20]};
+                ports.imm <= {{21{ports.instruction[31]}}, ports.instruction[30:20]};
             end
             
             //B-Type
@@ -44,7 +44,7 @@ module Decode(instr_ports.decode ports);
                 ports.r1_en <= 1'b1;
                 ports.r2_en <= 1'b1;
                 ports.csrr_en <= 1'b0;
-                ports.imm <= {20{ports.instruction[31]}, ports.instruction[7], ports.instruction[30:25], ports.instruction[11:8], 1'b0};
+                ports.imm <= {{20{ports.instruction[31]}}, ports.instruction[7], ports.instruction[30:25], ports.instruction[11:8], 1'b0};
             end
 
             //S-Type
@@ -55,7 +55,7 @@ module Decode(instr_ports.decode ports);
                 ports.r1_en <= 1'b1;
                 ports.r2_en <= 1'b1;
                 ports.csrr_en <= 1'b0;
-                ports.imm <= {21{ports.instruction[31]}, ports.instruction[30:25], ports.instruction[11:7]};
+                ports.imm <= {{21{ports.instruction[31]}}, ports.instruction[30:25], ports.instruction[11:7]};
             end
 
             //R-Type
