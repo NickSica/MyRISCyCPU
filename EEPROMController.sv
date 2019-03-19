@@ -18,20 +18,23 @@ typedef enum {
     STOP = 3'b110
 } ControllerState;
 
-module MemController(
+module EEPROMController(
     input logic clk,
-    input logic data);
+    input logic[7:0] w_data,
+    input logic enable,
+    input logic boot_en,
+    input logic i2c_addr[7:0],
+    input logic data_addr[7:0],
+    output logic boot_complete,
+    output logic[7:0] r_data[0:255]);
 
-    logic busy = 1'b0;
-    logic addr = 5'b1010_0000;
-    logic addr = 5'b1010_0001;
-    logic[7:0] w_data;
-    logic[7:0] r_data;
-    logic ack;
-    ControllerState state = WAIT;
-    logic sda;
-    logic count <= 7;
-    
+    initial begin
+        ControllerState state = WAIT;
+        logic sda;
+        logic count = 7;
+        logic ack;
+    end
+
     always_ff @(posedge clk) begin
         case(state)
             WAIT: begin
@@ -95,4 +98,4 @@ module MemController(
             end
         end
     end //always_ff
-endmodule: MemController
+endmodule: EEPROMController

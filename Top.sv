@@ -19,27 +19,37 @@ interface RAM_CPU();
     );
 endinterface: RAM_CPU
 
-interface Flags();
+interface flags();
+    logic[31:0] instr;
     logic[0] we_stall;
     logic[4:0] curr_rd;
 
-    modport src(
+    modport cpu(
         input curr_rd,
+        input instr,
         output we_bypass,
         output we_stall
     );
 
-    modport sink(
+    modport ram(
         input we_bypass,
         input we_stall,
-        output curr_rd
+        output instr
     );
 endinterface: flags;
 
-module Top(input clk, input logic[31:0] encoded_value);
-    initial begin
+module Top(input clk);
+    logic[7:0] bootcode[0:255];
 
+    initial begin
+        logic boot_complete = 1'b0;
+        while(boot_complete == 1'b0) begin
+            Boot boot(.clk(scl), .data(bootcode), .boot_complete);
+        end
     end
-    CPU cpu(.clk(clk), .fsrc(flags.src));
-    RAM ram();
+
+
+    CPU cpu(.clk(clk), .fcpu(flags.cpu));
+    RAM ram(.clk(clk), .fram(flags.ram));
+
 endmodule: Top
