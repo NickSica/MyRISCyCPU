@@ -1,12 +1,8 @@
 /*
-interface registers(input logic clk);
-    const logic x0 = 1'b0;
-    logic [31:0] x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11;
-    logic [31:0] x12, x13, x14, x15, x16, x17, x18, x19, x20;
-    logic [31:0] x21, x22, x23, x24, x25, x26, x27, x28, x29; 
-    logic [31:0] x30, x31, x32;
-    logic [31:0] pc;
-endinterface: registers
+DE0-Nano clock is 50MHz(20ns)
+RAM clock can be 166MHz(6.02ns), 143MHz(6.99ns), or 133MHZ(7.5ns) WE ARE USING 100MHz(10ns)
+Every 391 clock cycles send refresh
+I2C EEPROM can be 100KHz(10000ns), 400KHz(Fast Mode, 2500ns), or 3.4MHz(High Speed Mode, 294.117ns)
 */
 interface wishbone();
     // Master to Slave
@@ -52,14 +48,20 @@ interface flags();
 endinterface: flags;
 
 module Top(input clk);
-    logic[7:0] bootcode[0:255];
+    logic i2c_clk_counter = 1'b0;
+    logic ram_clk_counter = 1'b0;
+    logic[7:0] temp_bootcode[0:255];
+    logic[31:0] bootcode[0:255];
     wishbone wb();
+
+
 
     initial begin
         logic boot_complete = 1'b0;
         while(boot_complete == 1'b0) begin
             Boot boot(.clk(scl), .data(bootcode), .boot_complete);
         end
+        bootcode = {>>{temp_bootcode}};
     end
 
     always_comb begin

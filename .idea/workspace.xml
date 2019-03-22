@@ -12,8 +12,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dab1f5d-a958-4fdb-8490-d84381145a0a" name="Default Changelist" comment="">
+    <list default="true" id="9dab1f5d-a958-4fdb-8490-d84381145a0a" name="Default Changelist" comment="Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Boot.sv" beforeDir="false" afterPath="$PROJECT_DIR$/Boot.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EEPROMController.sv" beforeDir="false" afterPath="$PROJECT_DIR$/EEPROMController.sv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RAM.sv" beforeDir="false" afterPath="$PROJECT_DIR$/RAM.sv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Top.sv" beforeDir="false" afterPath="$PROJECT_DIR$/Top.sv" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
@@ -25,23 +28,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Top.sv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="70" column="34" lean-forward="true" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+            <state>
+              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
               <folding>
-                <element signature="e#512#792#0" />
+                <element signature="e#988#1310#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RAM.sv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            <state relative-caret-position="218">
+              <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
+              <folding>
+                <element signature="e#14#36#1" />
+                <element signature="e#449#1105#1" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -49,8 +56,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/EEPROMController.sv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1884">
-              <caret line="100" column="27" lean-forward="true" selection-start-line="100" selection-start-column="27" selection-end-line="100" selection-end-column="27" />
+            <state relative-caret-position="2070">
+              <caret line="90" column="3" selection-start-line="90" selection-start-column="3" selection-end-line="90" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -58,8 +65,37 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Boot.sv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+            <state relative-caret-position="184">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              <folding>
+                <element signature="e#0#346#0" />
+                <element signature="e#355#509#1" />
+                <element signature="e#548#1551#1" />
+                <element signature="e#629#1713#1" />
+                <element signature="e#658#868#1" />
+                <element signature="e#691#852#1" />
+                <element signature="e#891#1164#1" />
+                <element signature="e#941#1077#1" />
+                <element signature="e#1083#1173#1" />
+                <element signature="e#1145#1697#1" />
+                <element signature="e#1277#1372#1" />
+                <element signature="e#1378#1451#1" />
+                <element signature="e#1476#1543#1" />
+                <element signature="e#1582#1970#1" />
+                <element signature="e#1596#1962#1" />
+                <element signature="e#1796#2077#1" />
+                <element signature="e#1923#1982#1" />
+                <element signature="e#1988#2061#1" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/InstructionFetch.sv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="59" lean-forward="true" selection-start-column="59" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -76,12 +112,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CPU.sv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="71" column="16" lean-forward="true" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+            <state relative-caret-position="230">
+              <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
               <folding>
                 <element signature="e#0#306#1" />
                 <element signature="e#316#3187#1" />
-                <element signature="e#3204#4862#0" />
                 <element signature="e#4864#4985#0" />
               </folding>
             </state>
@@ -117,6 +152,7 @@
     </findStrings>
     <replaceStrings>
       <replace>bit_count</replace>
+      <replace>i2c_clk</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -131,15 +167,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.sv" />
-        <option value="$PROJECT_DIR$/CPU.sv" />
         <option value="$PROJECT_DIR$/RegisterFile.sv" />
         <option value="$PROJECT_DIR$/Execute.sv" />
         <option value="$PROJECT_DIR$/Decode.sv" />
         <option value="$PROJECT_DIR$/MemController.sv" />
         <option value="$PROJECT_DIR$/EEPROMController.sv" />
         <option value="$PROJECT_DIR$/Boot.sv" />
-        <option value="$PROJECT_DIR$/RAM.sv" />
         <option value="$PROJECT_DIR$/Top.sv" />
+        <option value="$PROJECT_DIR$/CPU.sv" />
+        <option value="$PROJECT_DIR$/RAM.sv" />
       </list>
     </option>
   </component>
@@ -203,7 +239,7 @@
       <workItem from="1552799650067" duration="3834000" />
       <workItem from="1552919865693" duration="63000" />
       <workItem from="1552919953379" duration="1027000" />
-      <workItem from="1552921077872" duration="20974000" />
+      <workItem from="1552921077872" duration="36309000" />
     </task>
     <task id="LOCAL-00001" summary="Bugfixes">
       <created>1552931676753</created>
@@ -226,11 +262,18 @@
       <option name="project" value="LOCAL" />
       <updated>1553031721431</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Changes">
+      <created>1553117371298</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1553117371298</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26813000" />
+    <option name="totallyTimeSpent" value="42148000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1927" y="-7" width="1295" height="695" extended-state="6" />
@@ -248,7 +291,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.32993197" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="9" side_tool="true" visible="true" weight="0.32993197" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32993197" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.60714287" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -296,9 +339,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/InstructionFetch.sv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/I2C.sv">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -309,24 +349,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RAM.sv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="12" column="17" lean-forward="true" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/EEPROMController.sv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1884">
-          <caret line="100" column="27" lean-forward="true" selection-start-line="100" selection-start-column="27" selection-end-line="100" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Boot.sv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="63" column="34" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+        <state relative-caret-position="184">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#346#0" />
+            <element signature="e#355#509#1" />
+            <element signature="e#548#1551#1" />
+            <element signature="e#629#1713#1" />
+            <element signature="e#658#868#1" />
+            <element signature="e#691#852#1" />
+            <element signature="e#891#1164#1" />
+            <element signature="e#941#1077#1" />
+            <element signature="e#1083#1173#1" />
+            <element signature="e#1145#1697#1" />
+            <element signature="e#1277#1372#1" />
+            <element signature="e#1378#1451#1" />
+            <element signature="e#1476#1543#1" />
+            <element signature="e#1582#1970#1" />
+            <element signature="e#1596#1962#1" />
+            <element signature="e#1796#2077#1" />
+            <element signature="e#1923#1982#1" />
+            <element signature="e#1988#2061#1" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -337,25 +383,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/InstructionFetch.sv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="59" lean-forward="true" selection-start-column="59" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CPU.sv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="71" column="16" lean-forward="true" selection-start-line="71" selection-start-column="16" selection-end-line="71" selection-end-column="16" />
+        <state relative-caret-position="230">
+          <caret line="77" column="18" lean-forward="true" selection-start-line="77" selection-start-column="18" selection-end-line="77" selection-end-column="18" />
           <folding>
             <element signature="e#0#306#1" />
             <element signature="e#316#3187#1" />
-            <element signature="e#3204#4862#0" />
             <element signature="e#4864#4985#0" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/EEPROMController.sv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2070">
+          <caret line="90" column="3" selection-start-line="90" selection-start-column="3" selection-end-line="90" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Top.sv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="70" column="34" lean-forward="true" selection-start-line="70" selection-start-column="34" selection-end-line="70" selection-end-column="34" />
+        <state>
+          <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
           <folding>
-            <element signature="e#512#792#0" />
+            <element signature="e#988#1310#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RAM.sv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
+          <folding>
+            <element signature="e#14#36#1" />
+            <element signature="e#449#1105#1" />
           </folding>
         </state>
       </provider>

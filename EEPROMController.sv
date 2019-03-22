@@ -88,7 +88,7 @@ module EEPROMController(
                 end
             end
         endcase
-    end
+end
 
     always_ff @(negedge clk) begin
         if(state == SEND_DATA || state == RECV_DATA) begin

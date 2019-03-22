@@ -9,21 +9,23 @@ typedef enum[3:0] {
 } ControllerState;
 
 module Boot(
-    input logic clk,
+    input logic i2c_clk,
+    input logic ram_clk,
     output logic boot_complete,
-    output logic[7:0] data[0:255] = '{default:0});
+    output logic[15:0] data[0:9] = '{default:0}); //First 5 Instructions
 
     logic sda;
     logic ack;
     logic data_byte = 8'b0;
     ControllerState state = WAIT;
+    logic[13:0] ram_addr = 13'b0;
     logic addr[7:0] = 8'b1010_0001;
     logic data_addr[7:0] = 8'b0;
     logic enable = 1'b1;
     logic bit_count = 7;
     logic cycle_count = 0;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge i2c_clk) begin
         case(state)
             WAIT: begin
                 if(enable) begin
@@ -65,7 +67,7 @@ module Boot(
         end
     end
 
-    always_ff @(negedge clk) begin
+    always_ff @(negedge i2c_clk) begin
         case(state)
             SEND: begin
                 sda <= addr[bit_count];
@@ -78,5 +80,11 @@ module Boot(
                 end
             end
         endcase
+    end
+
+    always_ff @(posedge ram_clk) begin
+        if() begin
+            Ram ram(.addr(ram_addr[12:0]), .bank(ram_addr[13]));
+        end
     end
 endmodule: Boot
