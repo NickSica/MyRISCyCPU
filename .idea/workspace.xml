@@ -12,13 +12,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9dab1f5d-a958-4fdb-8490-d84381145a0a" name="Default Changelist" comment="Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Boot.sv" beforeDir="false" afterPath="$PROJECT_DIR$/Boot.sv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EEPROMController.sv" beforeDir="false" afterPath="$PROJECT_DIR$/EEPROMController.sv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RAM.sv" beforeDir="false" afterPath="$PROJECT_DIR$/RAM.sv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Top.sv" beforeDir="false" afterPath="$PROJECT_DIR$/Top.sv" afterDir="false" />
-    </list>
+    <list default="true" id="9dab1f5d-a958-4fdb-8490-d84381145a0a" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RAM.sv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
+            <state relative-caret-position="195">
+              <caret line="117" column="16" lean-forward="true" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
               <folding>
                 <element signature="e#14#36#1" />
                 <element signature="e#449#1105#1" />
@@ -239,7 +233,7 @@
       <workItem from="1552799650067" duration="3834000" />
       <workItem from="1552919865693" duration="63000" />
       <workItem from="1552919953379" duration="1027000" />
-      <workItem from="1552921077872" duration="36309000" />
+      <workItem from="1552921077872" duration="36370000" />
     </task>
     <task id="LOCAL-00001" summary="Bugfixes">
       <created>1552931676753</created>
@@ -269,17 +263,23 @@
       <option name="project" value="LOCAL" />
       <updated>1553117371298</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Changes">
+      <created>1553287660317</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1553287660318</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42148000" />
+    <option name="totallyTimeSpent" value="42209000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1927" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21077283" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21077283" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -291,7 +291,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="9" side_tool="true" visible="true" weight="0.32993197" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" visible="true" weight="0.32993197" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32993197" />
       <window_info anchor="bottom" id="CMake" order="11" weight="0.60714287" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -421,8 +421,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/RAM.sv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
+        <state relative-caret-position="195">
+          <caret line="117" column="16" lean-forward="true" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
           <folding>
             <element signature="e#14#36#1" />
             <element signature="e#449#1105#1" />
